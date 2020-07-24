@@ -1,11 +1,68 @@
 spring:
-  profiles: ${JAVA_ENV}
+  #profiles: ${JAVA_ENV}
   application:
-    name:
+    name: graphql-sample
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
-    driver-class-name: com.mysql.jdbc.Driver
-  jpa:
-    hibernate.ddl-auto: update
+    url: ${DATABASE_URL:jdbc:h2:file:~/graphql-test}
+    username: ${DATABASE_USER:sa}
+    password: ${DATABASE_PASSWORD:''}
+    #driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: org.h2.Driver
+  #jpa:
+    #database-platform: org.hibernate.dialect.H2Dialect
+    #hibernate.ddl-auto: update
+
+
+
+  graphql:
+    servlet:
+      mapping: /graphql
+      enabled: true
+      corsEnabled: true
+    #cors:
+    #  allowed-origins: http://some.domain.com
+    # if you want to @ExceptionHandler annotation for custom GraphQLErrors
+#    exception-handlers-enabled: true
+#    contextSetting: PER_REQUEST_WITH_INSTRUMENTATION
+
+#graphql.playground:
+#  mapping: /playground
+#  endpoint: /graphql
+#  subscriptionEndpoint: /subscriptions
+#  staticPath.base: my-playground-resources-folder
+#  enabled: true
+#  pageTitle: Playground
+#  cdn:
+#    enabled: false
+#    version: latest
+#  settings:
+#    editor.cursorShape: line
+#    editor.fontFamily: "'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace"
+#    editor.fontSize: 14
+#    editor.reuseHeaders: true
+#    editor.theme: dark
+#    general.betaUpdates: false
+#    prettier.printWidth: 80
+#    prettier.tabWidth: 2
+#    prettier.useTabs: false
+#    request.credentials: omit
+#    schema.polling.enable: true
+#    schema.polling.endpointFilter: "*localhost*"
+#    schema.polling.interval: 2000
+#    schema.disableComments: true
+#    tracing.hideTracingResponse: true
+#  headers:
+#    headerFor: AllTabs
+#  tabs:
+#    - name: Example Tab
+#      query: classpath:exampleQuery.graphql
+#      headers:
+#        SomeHeader: Some value
+#      variables: classpath:variables.json
+#      responses:
+#        - classpath:exampleResponse1.json
+#        - classpath:exampleResponse2.json

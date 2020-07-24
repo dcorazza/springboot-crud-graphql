@@ -10,4 +10,5 @@ public class GraphqlCrudSampleApplication {
 		SpringApplication.run(GraphqlCrudSampleApplication.class, args);
 	}
 
+
 }
